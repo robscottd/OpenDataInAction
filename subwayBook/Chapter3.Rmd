@@ -1,0 +1,21 @@
+# Using Data to Augment Gyeonggang Line Map
+
+We saw the map of the Gyeonggang Line in Section \@ref(LineMap).  We can now augment it with additional information.
+
+## Augmented Gyeonggang Line Map
+
+The map will now include additional information about each station and the size of its marker represent the total number of passengers that arrive at the station.
+
+```{r fig04, fig.cap='Augmented Map',out.width='80%',fig.asp=.75,fig.align='center',echo=FALSE}
+popup<-paste(sep = "<br/>",
+            paste0("<b>","Station","</b>"),
+            paste0("Hangul: ",KKStations$Station),
+            paste0("Roman: ",KKStations$romanStation),
+            paste0("Passenger Arrivals: ",KKStations$peopleCount))
+             
+
+leaflet(KKStations)%>% setView(lng = 127.268109, lat = 37.299880, zoom = 10) %>% addTiles() %>%
+    addCircles(lng = ~Y.WGS, lat = ~X.WGS, weight = 1,color="Black",fillColor = "Yellow",
+               fillOpacity = 0.8,radius = ~sqrt(peopleCount)*10, 
+               popup = popup)
+```

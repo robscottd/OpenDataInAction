@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Passenger Arrival and Departure Heatmaps\n\nWe can use heatmaps to interactively explore passenger morning arrival and evening departure times.\n\n## Morning Arrival Heatmap\n\nThe passenger arrival heatmap shows that, not unsurprisingly, the termini have the most morning arrivals.\n\n```{r fig02, fig.cap='Arrival Heatmap',out.width='80%',fig.asp=.75,fig.align='center',echo=FALSE}\n\nmorningMatrix<-offMatrix[,PangyoMorningArrivals]\n\nd3heatmap(morningMatrix,dendrogram = \"none\",colors=\"YlOrRd\",\n          xaxis_font_size=\"12px\",yaxis_font_size=\"10px\")\n```\n## Evening Departure Heatmap\n\nThe passenger departure heatmap shows that, not unsurprisingly, the termini have the most evening departures.\n\n```{r fig03, fig.cap='Departure Heatmap',out.width='80%',fig.asp=.75,fig.align='center',echo=FALSE}\n\neveningMatrix<-onMatrix[,PangyoEveningDepartures]\nd3heatmap(eveningMatrix,dendrogram = \"none\",colors=\"YlOrRd\",\n          xaxis_font_size=\"12px\",yaxis_font_size=\"10px\")\n```",
+    "created" : 1478911430684.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2488752513",
+    "id" : "844A4CB3",
+    "lastKnownWriteTime" : 1478971778,
+    "last_content_update" : 1478971778273,
+    "path" : "~/Documents/ODIOttawa/Seoul/OpenDataInAction/subwayBook/Chapter2.Rmd",
+    "project_path" : "Chapter2.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

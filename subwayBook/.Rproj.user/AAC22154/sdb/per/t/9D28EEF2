@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Using Data to Augment Gyeonggang Line Map\n\nWe saw the map of the Gyeonggang Line in Section \\@ref(LineMap).  We can now augment it with additional information.\n\n## Augmented Gyeonggang Line Map\n\nThe map will now include additional information about each station and the size of its marker represent the total number of passengers that arrive at the station.\n\n```{r fig04, fig.cap='Augmented Map',out.width='80%',fig.asp=.75,fig.align='center',echo=FALSE}\npopup<-paste(sep = \"<br/>\",\n            paste0(\"<b>\",\"Station\",\"</b>\"),\n            paste0(\"Hangul: \",KKStations$Station),\n            paste0(\"Roman: \",KKStations$romanStation),\n            paste0(\"Passenger Arrivals: \",KKStations$peopleCount))\n             \n\nleaflet(KKStations)%>% setView(lng = 127.268109, lat = 37.299880, zoom = 10) %>% addTiles() %>%\n    addCircles(lng = ~Y.WGS, lat = ~X.WGS, weight = 1,color=\"Black\",fillColor = \"Yellow\",\n               fillOpacity = 0.8,radius = ~sqrt(peopleCount)*10, \n               popup = popup)\n```",
+    "created" : 1478970259331.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4102117632",
+    "id" : "9D28EEF2",
+    "lastKnownWriteTime" : 1478971897,
+    "last_content_update" : 1478971897176,
+    "path" : "~/Documents/ODIOttawa/Seoul/OpenDataInAction/subwayBook/Chapter3.Rmd",
+    "project_path" : "Chapter3.Rmd",
+    "properties" : {
+        "ignored_words" : "LineMap\n"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
