@@ -82,8 +82,8 @@ KKStations$Y.WGS[11]<-127.628672
 ```
 # The Gyeonggang Line
 ## Introduction {#intro}
-<img src="pep.jpg" />
 
+![Panyo to Yeoju](PangyoYeoju.jpg)
 The Gyeonggang Line runs from Pangyo station to Yeoju station. It is approximately 55 km in length.  It is operated by Korail.
 
 ## Line Map {#LineMap}
