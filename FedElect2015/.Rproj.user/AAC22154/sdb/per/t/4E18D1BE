@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "function(input, output, session) {\nWinner <-  reactive({  \n      getWinMethod(input$radio)\n  })\ntheNodesLinks <-  reactive({  \n    getRidingNodesAndLinks(input$riding,input$minFol)\n})\n\nterms <- reactive({\n#    withProgress({getText(input$radioWords,input$xHash,input$xTwit,input$minFreq,input$maxWords)},message = 'Generating data')\n    getText(input$radioWords,input$xHash,input$xTwit,input$minFreq,input$maxWords)\n})\n    output$mymap <- renderLeaflet({\n        Win<-Winner()\n#        popup <- paste0(\"<strong>Riding: </strong>\", \n#                        ridings@data$ENNAME,\"\\n\",ridings@data$Con)\n\n        popup<-paste(sep = \"<br/>\",\n                     paste0(\"<b>\",gsub(\"--\",\"-\",ridings@data$ENNAME),\"</b>\"),\n                     paste0(\"Con: \",ridings@data$Con),\n                     paste0(\"Lib: \",ridings@data$Lib),\n                     paste0(\"NDP: \",ridings@data$NDP)\n        )\n        \n        \n        leaflet(ridings)  %>% setView(lng = -75.686389, lat = 45.226389, zoom = 9) %>%\n            addTiles() %>%\n            addPolygons(weight=2,fillOpacity = 0.4, smoothFactor = 0.5,color=\"black\",  \n                        fillColor = ~factpal(Win),popup=popup)%>%\n    addLegend(\"bottomright\", pal = factpal, values = ~Win,\n                      title = \"Parties\",\n                      opacity = 1\n            )\n    })\n    output$force <- renderForceNetwork({\n        withProgress({NodesLinks<-theNodesLinks()\n        ridingNodes<-NodesLinks[[1]]\n        ridingLinks<-NodesLinks[[2]]\n        forceNetwork(Links = ridingLinks, Nodes = ridingNodes,\n                     Source = \"source\", Target = \"target\",\n                     Value = \"value\", NodeID = \"name\",Nodesize=\"size\",Group = \"group\",\n                     colourScale = JS(\"d3.scale.ordinal().domain(['Con', 'Lib', 'NDP','follower']).range(['royalblue', 'red', 'darkorange','green'])\"),\n                     fontSize = 12,radiusCalculation = JS(\"Math.sqrt(d.nodesize) + 2\"), \n                     charge=-20,opacity = 0.4,zoom=TRUE,legend=TRUE)},message=\"Generating Graph\")\n    })\n    output$plot <- renderPlot({\n        withProgress({wordcloud(names(terms()), terms(), scale=c(3.5,0.3),\n                  min.freq = input$minFreq, max.words=input$maxWords,\n                  colors=brewer.pal(8, \"Dark2\"))},message=\"Generating Cloud\")\n})\n\n}",
+    "created" : 1442099543102.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "970630029",
+    "id" : "4E18D1BE",
+    "lastKnownWriteTime" : 1444695833,
+    "last_content_update" : 0,
+    "path" : "~/Documents/ODOttawa/FedElect2015/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
