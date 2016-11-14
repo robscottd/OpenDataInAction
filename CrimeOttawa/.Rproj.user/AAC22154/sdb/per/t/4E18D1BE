@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "function(input, output, session) {\n\naPoly <- reactive({\n#    withProgress({getText(input$radioWords,input$xHash,input$xTwit,input$minFreq,input$maxWords)},message = 'Generating data')\n   getPoly(input$yearSelect,input$ccSelect,input$statSelect)\n})\n    output$mymap <- renderLeaflet({\n        withProgress(message = 'Map generation in progress',{\n            thePoly<-aPoly()\n         if (!is.null(thePoly)){\n            popup<-paste(sep = \"<br/>\",\n                         paste0(\"<b>Ward Name:</b> \",thePoly@data$ward_Name),\n                         paste0(\"<b>Value:</b> \",thePoly@data$numAmt)\n            )\n            leaflet(thePoly)  %>% setView(lng = location[1], lat = location[2], zoom = 9) %>%\n                addTiles() %>%\n                addPolygons(weight=2,fillOpacity = 0.6, smoothFactor = 0.5,color=\"black\",  \n                        fillColor = ~factpal(numAmt),popup=popup)%>%\n            addLegend(\"bottomright\", pal = factpal, values = ~numAmt,\n                      title = \"Value\",\n                      opacity = 1\n            )\n            \n        }\n        else {\n            leaflet(thePoly)  %>% setView(lng = location[1], lat = location[2], zoom = 9) %>%\n                addTiles()\n        }\n        })\n    })\n}",
+    "created" : 1442099543102.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2776509874",
+    "id" : "4E18D1BE",
+    "lastKnownWriteTime" : 1475093641,
+    "last_content_update" : 1475093641493,
+    "path" : "~/Documents/ODOttawa/Crime_Statistics/CrimeOttawa/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
