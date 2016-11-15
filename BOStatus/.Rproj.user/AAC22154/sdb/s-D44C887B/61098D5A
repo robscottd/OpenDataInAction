@@ -1,0 +1,18 @@
+{
+    "contents" : "library(shinythemes)\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(ggmap)\nlibrary(sp)\nlibrary(leaflet)\nlibrary(rgdal)\nlibrary(reshape2)\n\nload(\"theNoise.RData\")\nload(\"zoomLink.RData\")\n\nfactpal <- colorNumeric(rev(heat.colors(5)), domain = NULL)\n\n#seq.Date(as.Date(\"2015-07-08\"),as.Date(\"2015-07-19\"),by=\"day\")\n\n#getWard <- function(sel) {\n#    return(ifelse(sel==2,barMelt12,ifelse(sel==3,barMelt14,barMelt)))\n#}\n\n#ward <- getWard(1)\nwe<-barMelt\nwe$date<-strptime(barMelt$charDate,format=\"%Y-%m-%d\")\nwe$day<-strptime(barMelt$charDate,format=\"%Y-%m-%d\")$wday+1\nwe<-we[we$day %in% c(1,7),]\nwe$y<-0\nnames(barMelt)[2] <- \"BylawOfficerStatus\"\nnames(barMelt12)[2] <- \"BylawOfficerStatus\"\nnames(barMelt14)[2] <- \"BylawOfficerStatus\"\np1 <- ggplot(barMelt, aes(as.Date(charDate), value)) + geom_line(aes(colour = BylawOfficerStatus)) + geom_point(data=we,aes(x=as.Date(date),y=y))\np2 <- ggplot(barMelt12, aes(as.Date(charDate), value)) + geom_line(aes(colour = BylawOfficerStatus)) + geom_point(data=we,aes(x=as.Date(date),y=y))\np3 <- ggplot(barMelt14, aes(as.Date(charDate), value)) + geom_line(aes(colour = BylawOfficerStatus))+ geom_point(data=we,aes(x=as.Date(date),y=y))\n\ntheP <- list(p1,p2,p3)\nthePMax <- c(max(barMelt$value)+10,max(barMelt12$value)+10,max(barMelt14$value)+10)\n\n\nnames(barMelt2016)[2] <- \"TYPE\"",
+    "created" : 1457036414727.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "567281475",
+    "id" : "61098D5A",
+    "lastKnownWriteTime" : 1457202656,
+    "path" : "~/Documents/ODOttawa/IODD2016/BOStatus/global.R",
+    "project_path" : "global.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nnavbarPage(\"Ottawa 311 Noise Incidents\",theme = shinytheme(\"flatly\"),\n           tabPanel(\"2015 Ward Map\",                          \n                    sidebarLayout(\n                        sidebarPanel(            \n                            radioButtons(\"radio1\", label = \"Time Period\",\n                                         choices = list(\"Current\" = 1,\n                                                        \"1794\" = 2),selected = 1),\n                            sliderInput(\"Opa\", \"Ward Opacity\", 0.1, 0.6, value=0.4),\n                            div(p(\"To see ward name, number and its total noise incidents, click on the ward on the map.\"),\n                                br(),\n                                p(\"To zoom in and out on the map, place mouse over map and scroll down or up.  To\n                      scroll web page, mouse must be off map.\"),style = \"color:seagreen\"),\n                            width=3),\n                    mainPanel(\n                        leafletOutput(\"mymap\"),\n                        div(p(\"1794 map layer from The Lionel Pincus & Princess Firyal Map Division, The New York Public Library.\"))\n                    )\n\n                    )\n\n           ),\n           \n           tabPanel(\"2015 Chart\",                          \n                    sidebarLayout(\n                        sidebarPanel(            \n                            radioButtons(\"radio2\", label = h4(\"Ottawa Wards\"),\n                                         choices = list(\"All\" = 1,\n                                                        \"Ward 12 Rideau-Vanier\" = 2,\n                                                        \"Ward 14 Somerset\" = 3),selected = 1),\n                            div(p(\"Pick wards for chart\")),\n                            br(),\n                            width=3),\n                        mainPanel(\n                            plotOutput(\"zoom\", height = \"350px\"),\n                            plotOutput(\"overall\", height = \"150px\",\n                                       brush =  brushOpts(id = \"brush\", direction = \"x\"))\n                        )\n                    )\n           ),\n           tabPanel(\"2016 Chart\",\n                        basicPage(\n                            plotOutput(\"zoom2\", height = \"350px\"),\n                            plotOutput(\"overall2\", height = \"150px\",\n                                       brush =  brushOpts(id = \"brush\", direction = \"x\"))\n                        )\n                    )\n)",
+    "created" : 1457117589587.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3734451488",
+    "id" : "170785DA",
+    "lastKnownWriteTime" : 1457116568,
+    "path" : "~/Documents/ODOttawa/IODD2016/BOStatus/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

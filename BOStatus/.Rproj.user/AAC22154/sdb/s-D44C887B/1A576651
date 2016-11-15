@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\nfunction(input, output) {\n    \n#        theP <-  reactive({  \n#            getP(input$radio2)\n#        })\n    \n    output$mymap <- renderLeaflet({\n        \n        popup<-paste(sep = \"<br/>\",\n                     paste0(\"<b>\",wardPoly@data$DESCRIPTIO,\"</b>\"),\n                     paste0(\"Ward Number: \",wardPoly@data$WARD_NUM),\n                     paste0(\"Total Incidents: \",wardPoly@data$noiseCount)\n        )\n        if(input$radio1==1) {\n            leaflet(wardPoly)  %>% setView(lng = -75.67724, lat = 45.29814, zoom = 10) %>%\n                addTiles() %>%\n                addPolygons(weight=2,fillOpacity = input$Opa, smoothFactor = 0.5,color=\"black\",  \n                            fillColor = ~factpal(noiseCount),popup=popup)%>%\n                addLegend(\"bottomright\", pal = factpal, values = ~noiseCount,\n                          title = \"Incidents\",\n                          opacity = 1\n                )            \n        }\n        else {\n        leaflet(wardPoly)  %>% setView(lng = -75.67724, lat = 45.29814, zoom = 10) %>%\n            addTiles() %>%\n            addTiles(\"http://maps.nypl.org/warper/maps/tile/13864/{z}/{x}/{y}.png\",\n                     options = tileOptions(opacity = 0.5)) %>%\n            addPolygons(weight=2,fillOpacity = input$Opa, smoothFactor = 0.5,color=\"black\",  \n                        fillColor = ~factpal(noiseCount),popup=popup)%>%\n            addLegend(\"bottomright\", pal = factpal, values = ~noiseCount,\n                      title = \"Incidents\",\n                      opacity = 1\n            )}\n    })\n    \n#    p <- ggplot(barMelt12, aes(as.Date(charDate), value)) + geom_line(aes(colour = variable))\n\n#    p <- theP[[input$radio2]] + xlab(\"Date\") + ylab(\"Noise Incidents\") + ggtitle(\"Ottawa 311 Noise Incidents\")\n\n   output$zoom <- renderPlot({\n       p <- theP[[as.integer(input$radio2)]] + xlab(\"Date\") + ylab(\"Noise Incidents\") + ggtitle(\"Ottawa 311 Noise Incidents-Select Dates to Zoom\") + ylim(0,thePMax[as.integer(input$radio2)])\n       if (!is.null(input$brush)) {\n            p <- p + xlim(as.Date(c(input$brush$xmin,input$brush$xmax),origin=\"1970-01-01\"))\n        }\n        p\n    })\n\n    output$overall <- renderPlot({\n        p1<-theP[[as.integer(input$radio2)]] + xlab(\"Date\") + ylab(\"Noise Incidents\") + ggtitle(\"Select Date Range to Zoom in on Above Chart\")\n        p1\n    })\n        \n    \n    p2 <- ggplot(barMelt2016, aes(as.Date(theDay), value)) + geom_line(aes(colour = TYPE))\n    p2 <- p2 + xlab(\"Date\") + ylab(\"Noise Incidents\") + ggtitle(\"Ottawa 311 Noise Incidents\")\n    output$zoom2 <- renderPlot({\n        if (!is.null(input$brush)) {\n            p2 <- p2 + xlim(as.Date(c(input$brush$xmin,input$brush$xmax),origin=\"1970-01-01\"))\n        }\n        p2\n    })\n    output$overall2 <- renderPlot(p2)\n    \n}\n",
+    "created" : 1456943129596.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3470840893",
+    "id" : "1A576651",
+    "lastKnownWriteTime" : 1457118090,
+    "path" : "~/Documents/ODOttawa/IODD2016/BOStatus/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
