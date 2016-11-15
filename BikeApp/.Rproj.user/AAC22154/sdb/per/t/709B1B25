@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\nfluidPage(\n\n    tags$style(type=\"text/css\",\n               \"#mymap.recalculating { opacity: 1.0; }\"),\n\n        #    tags$style(type=\"text/css\", \".recalculating { opacity: 1.0; }\"),\n    \n          title=\"Bikes and Weather!\",\n          leafletOutput(\"mymap\"),\n          hr(),\n          fluidRow(\n              column(3,\n                     selectInput(\"aWeather\", \"Choose Weather Factor:\", \n                                 choices = list(\"Minimum Temperature\"=\"minT\",\n                                                \"Maximum Temperature\"=\"maxT\",\n                                                \"Total Precipitation\"=\"totP\"))),\n              column(8,offset=1,\n                     sliderInput(\"dates\", \"Dates\", min=as.Date(\"2010-01-01\", format=\"%Y-%m-%d\"),\n                                 max=as.Date(\"2015-09-30\", format=\"%Y-%m-%d\"),\n                                 value=as.Date(\"2013-06-01\", format=\"%Y-%m-%d\"),width=\"80%\",\n                                 animate = animationOptions(interval = 500),\n                                 dragRange = TRUE),\n                     h4(\"Play Animation\"),\n                     p(\"Select start date on slider and click arrow below slider to the right to begin\")\n              )\n          )\n)",
+    "created" : 1454719096195.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3953717543",
+    "id" : "709B1B25",
+    "lastKnownWriteTime" : 1468845474,
+    "last_content_update" : 1468845474789,
+    "path" : "~/Documents/ODOttawa/bikecounters/BikeApp/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

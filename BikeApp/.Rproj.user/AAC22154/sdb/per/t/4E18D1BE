@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "function(input, output, session) {\n    theDay <-  reactive({  \n        getDay(input$aWeather,input$dates)\n    })\n    thePal <-  reactive({  \n        getPal(input$aWeather)\n    })\n    thePalRange <-  reactive({  \n        getPalRange(input$aWeather)\n    })\n\n    output$mymap <- renderLeaflet({\n#        Sys.sleep(1)\n#        invalidateLater(1000)\n        day<-theDay()\n        palW<-thePal()\n        palRange<-thePalRange()\n        popup<-paste(sep = \"<br/>\",\n                     paste0(\"<b>\",day$Location,\"</b>\"),\n                     paste0(\"<b>\",\"Count: \",\"</b>\",day$theCount)\n        )\n    \n            leaflet(day)%>% setView(lng = -75.698157, lat = 45.416841, zoom = 13) %>% addTiles() %>%\n                addCircles(lng = ~lon, lat = ~lat, weight = 1,color=\"Black\",fillColor = ~palW(theWeather),\n                           radius = ~sqrt(theCount)*10, popup = ~Location\n                ) %>%\n                addLegend(\"bottomright\", pal = palW,values=palRange$aRange,\n                          title = palRange$aTitle,\n                          opacity = 1\n                )\n    })\n}",
+    "created" : 1442099543102.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3482054900",
+    "id" : "4E18D1BE",
+    "lastKnownWriteTime" : 1460642517,
+    "last_content_update" : 0,
+    "path" : "~/Documents/ODOttawa/bikecounters/BikeApp/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

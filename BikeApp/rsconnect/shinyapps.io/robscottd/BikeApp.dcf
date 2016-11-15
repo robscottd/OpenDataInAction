@@ -1,0 +1,9 @@
+name: BikeApp
+account: robscottd
+server: shinyapps.io
+appId: 82398
+bundleId: 508068
+url: https://robscottd.shinyapps.io/BikeApp/
+when: 1468845576.8139
+asMultiple: FALSE
+asStatic: FALSE

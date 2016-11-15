@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#library(rgdal)\nlibrary(shinythemes)\nlibrary(leaflet)\nlibrary(colorRamps)\n\nload(\"bikeWeather.RData\")\nnilDF<-data.frame(Location=\"X1ALEX\",theCount=0,theWeather=0,lon=-75.7045,lat=45.4302)\nthePlay<-\"Play\"\ngetDay <- function(w,d) {\n    if(w == \"minT\") {\n        theDF<-finalMerge[finalMerge$theDate==strptime(d, format=\"%Y-%m-%d\"),c(1,3,5,7,8)]\n        if(nrow(theDF)==0){\n            return(nilDF)\n        }\n        else {\n            names(theDF)[3]<-\"theWeather\"\n            return(theDF)\n        }\n    }\n    else if(w == \"maxT\") {\n        theDF<-finalMerge[finalMerge$theDate==strptime(d, format=\"%Y-%m-%d\"),c(1,3,4,7,8)]\n        if(nrow(theDF)==0){\n            return(nilDF)\n        }\n        else {\n            names(theDF)[3]<-\"theWeather\"\n            return(theDF)\n        }\n    }\n    else {\n        theDF<-finalMerge[finalMerge$theDate==strptime(d, format=\"%Y-%m-%d\"),c(1,3,6,7,8)]\n        if(nrow(theDF)==0){\n            return(nilDF)\n        }\n        else {\n            names(theDF)[3]<-\"theWeather\"\n            return(theDF)\n        }\n    }\n}\n\ngetPal <- function(w) {\n    if(w == \"minT\") {\n        return(colorNumeric(palette=blue2red(10),domain=finalMerge$minTemp))\n    }\n    else if(w == \"maxT\") {\n        return(colorNumeric(palette=blue2red(10),domain=finalMerge$maxTemp))\n    }\n    else {\n        return(colorBin(palette=blue2red(6),bins=c(0,0.001,5,10,15,20,100),domain=finalMerge$totPrecip))\n    }\n}\n\ngetPalRange <- function(w) {\n    if(w == \"minT\") {\n        return(list(\"aRange\"=finalMerge$minTemp,\"aTitle\"=\"Daily Minimum Temperature - Celsius\"))\n    }\n    else if(w == \"maxT\") {\n        return(list(\"aRange\"=finalMerge$maxTemp,\"aTitle\"=\"Daily Maximum Temperature - Celsius\"))\n    }\n    else {\n        return(list(\"aRange\"=finalMerge$totPrecip,\"aTitle\"=\"Daily Total Precipitation - mms\"))\n    }\n}\n\nday<-getDay(\"minT\",\"2013-07-01\")\npalW<-getPal(\"minT\")\npalRange<-getPalRange(\"minT\")",
+    "created" : 1440684760064.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1128996143",
+    "id" : "80844F1B",
+    "lastKnownWriteTime" : 1454874687,
+    "last_content_update" : 0,
+    "path" : "~/Documents/ODOttawa/bikecounters/BikeApp/global.R",
+    "project_path" : "global.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
